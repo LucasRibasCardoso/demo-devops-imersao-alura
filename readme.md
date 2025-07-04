@@ -1,64 +1,63 @@
-# Imersão DevOps - Alura Google Cloud
+# Projeto Imersão DevOps - Alura Google Cloud
 
-Este projeto é uma API desenvolvida com FastAPI para gerenciar alunos, cursos e matrículas em uma instituição de ensino.
+Este repositório documenta a jornada prática da Imersão DevOps da Alura. O objetivo principal foi aplicar um fluxo de trabalho DevOps completo a uma API em Python (FastAPI), desde a criação do ambiente com Docker até a automação do deploy na nuvem com GitHub Actions e Google Cloud.
 
-## Pré-requisitos
+A API base utilizada, que serve como objeto de estudo, foi fornecida pela equipe Alura e pode ser encontrada [aqui](https://github.com/guilhermeonrails/ellis)
 
-- [Python 3.10 ou superior instalado](https://www.python.org/downloads/)
-- [Git](https://git-scm.com/downloads)
-- [Docker](https://www.docker.com/get-started/)
 
-## Passos para subir o projeto
+## Tecnologias e Conceitos Aplicados
+- Containerização: Uso de Docker e Dockerfile para criar um ambiente padronizado e isolado para a aplicação.
 
-1. **Faça o download do repositório:**
-   [Clique aqui para realizar o download](https://github.com/guilhermeonrails/imersao-devops/archive/refs/heads/main.zip)
+- Orquestração de Contêineres: Utilização do Docker Compose para simplificar a gestão do ambiente de desenvolvimento local.
 
-2. **Crie um ambiente virtual:**
-   ```sh
-   python3 -m venv ./venv
-   ```
+- Integração Contínua (CI): Automação com GitHub Actions para construir e validar a imagem Docker a cada alteração no código.
 
-3. **Ative o ambiente virtual:**
-   - No Linux/Mac:
-     ```sh
-     source venv/bin/activate
-     ```
-   - No Windows:
-     ```sh
-     venv\Scripts\activate
-     ```
+- Deploy Contínuo (CD): Implantação da aplicação no Google Cloud Run, uma plataforma serverless para contêineres.
 
-4. **Instale as dependências:**
-   ```sh
-   pip install -r requirements.txt
-   ```
+## 🌐 Aplicação em Produção
+A API implantada como resultado deste projeto pode ser acessada através do seguinte link:
 
-5. **Execute a aplicação:**
-   ```sh
-   uvicorn app:app --reload
-   ```
+[https://api-escolar-354902248408.southamerica-east1.run.app/docs](https://api-escolar-354902248408.southamerica-east1.run.app/docs)
 
-6. **Acesse a documentação interativa:**
+## Como Executar o Projeto Localmente
+Para executar a aplicação no seu ambiente de desenvolvimento, você precisará ter o Git e o Docker (com Docker Compose) instalados.
 
-   Abra o navegador e acesse:  
-   [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
+1. Clone o repositório:
+   ~~~
+      git clone https://github.com/LucasRibasCardoso/demo-imersao-alura-devops.git
+      cd demo-imersao-alura-devops
+   ~~~
+2. Suba o ambiente com Docker Compose:
+   ~~~
+   docker-compose up
+   ~~~
+3. Acesse a API: http://localhost:8000/docs
 
-   Aqui você pode testar todos os endpoints da API de forma interativa.
 
----
+## O Pipeline DevOps
+Este projeto implementa um pipeline DevOps completo, desde o código até a produção.
 
-## Estrutura do Projeto
+#### 1. Dockerização (```Dockerfile```)
 
-- `app.py`: Arquivo principal da aplicação FastAPI.
-- `models.py`: Modelos do banco de dados (SQLAlchemy).
-- `schemas.py`: Schemas de validação (Pydantic).
-- `database.py`: Configuração do banco de dados SQLite.
-- `routers/`: Diretório com os arquivos de rotas (alunos, cursos, matrículas).
-- `requirements.txt`: Lista de dependências do projeto.
+   O arquivo ```Dockerfile``` contém o passo a passo para criar uma imagem executável da aplicação. Ele utiliza uma imagem base de Python, instala as dependências e define o comando para iniciar o servidor Uvicorn.
 
----
+#### 2. Integração Contínua (GitHub Actions)
 
-- O banco de dados SQLite será criado automaticamente como `escola.db` na primeira execução.
-- Para reiniciar o banco, basta apagar o arquivo `escola.db` (isso apagará todos os dados).
+O workflow definido em ```.github/workflows/docker-image.yml``` automatiza a validação do projeto.
 
----
+- Gatilho: É acionado a cada ```push``` ou ```pull``` request na branch ```main```.
+
+- Ação: Ele constrói a imagem Docker usando o ```Dockerfile```. Cada build recebe uma tag única baseada no timestamp ```($(date +%s))```, garantindo um versionamento claro.
+      
+- Objetivo: Garantir que as novas alterações no código não quebrem a capacidade de construir uma imagem funcional da aplicação.
+
+#### 3. Deploy Contínuo (Google Cloud Run)
+O deploy final é feito manualmente através da CLI do Google Cloud, mas segue um processo automatizado na nuvem.
+
+- Autenticação e Configuração: Os comandos ```gcloud auth login``` e ```gcloud config set project``` preparam o ambiente local para se comunicar com o projeto correto no GCP.
+
+- Deploy: O comando ```gcloud run deploy``` envia o código para o Google Cloud Build, que constrói e armazena a imagem no Artifact Registry. Em seguida, o Google Cloud Run utiliza essa imagem para implantar uma nova versão da aplicação, disponibilizando-a através de uma URL HTTPS segura e escalável.
+
+
+
+
