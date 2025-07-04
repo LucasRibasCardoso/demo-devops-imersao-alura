@@ -6,33 +6,20 @@ A API base utilizada, que serve como objeto de estudo, foi fornecida pela equipe
 
 
 ## Tecnologias e Conceitos Aplicados
-- Containerização: Uso de Docker e Dockerfile para criar um ambiente padronizado e isolado para a aplicação.
+Containerização: Uso de Docker e Dockerfile para criar um ambiente padronizado e isolado para a aplicação.
 
-- Orquestração de Contêineres: Utilização do Docker Compose para simplificar a gestão do ambiente de desenvolvimento local.
+Orquestração de Contêineres: Utilização do Docker Compose para simplificar a gestão do ambiente de desenvolvimento local.
 
-- Integração Contínua (CI): Automação com GitHub Actions para construir e validar a imagem Docker a cada alteração no código.
+Integração Contínua (CI): Automação com GitHub Actions para construir e validar a imagem Docker a cada alteração no código.
 
-- Deploy Contínuo (CD): Implantação da aplicação no Google Cloud Run, uma plataforma serverless para contêineres.
+Deploy Contínuo (CD): Implantação da aplicação no Google Cloud Run, uma plataforma serverless para contêineres.
 
-## 🌐 Aplicação em Produção
-A API implantada como resultado deste projeto pode ser acessada através do seguinte link:
-
-[https://api-escolar-354902248408.southamerica-east1.run.app/docs](https://api-escolar-354902248408.southamerica-east1.run.app/docs)
-
-## Como Executar o Projeto Localmente
-Para executar a aplicação no seu ambiente de desenvolvimento, você precisará ter o Git e o Docker (com Docker Compose) instalados.
-
-1. Clone o repositório:
-   ~~~
-      git clone https://github.com/LucasRibasCardoso/demo-imersao-alura-devops.git
-      cd demo-imersao-alura-devops
-   ~~~
-2. Suba o ambiente com Docker Compose:
-   ~~~
-   docker-compose up
-   ~~~
-3. Acesse a API: http://localhost:8000/docs
-
+<div>
+   <img src="https://github.com/tandpfun/skill-icons/blob/main/icons/Docker.svg" width="50"/>
+   <img src="https://github.com/tandpfun/skill-icons/blob/main/icons/GithubActions-Dark.svg" width="50"/>
+   <img src="https://github.com/tandpfun/skill-icons/blob/main/icons/Python-Dark.svg" width="50"/>
+   <img src="https://github.com/tandpfun/skill-icons/blob/main/icons/FastAPI.svg" width="50"/>
+</div>
 
 ## O Pipeline DevOps
 Este projeto implementa um pipeline DevOps completo, desde o código até a produção.
@@ -59,5 +46,22 @@ O deploy final é feito manualmente através da CLI do Google Cloud, mas segue u
 - Deploy: O comando ```gcloud run deploy``` envia o código para o Google Cloud Build, que constrói e armazena a imagem no Artifact Registry. Em seguida, o Google Cloud Run utiliza essa imagem para implantar uma nova versão da aplicação, disponibilizando-a através de uma URL HTTPS segura e escalável.
 
 
+## Aplicação em Produção
+A API implantada como resultado deste projeto pode ser acessada através do seguinte link:
 
+[https://api-escolar-354902248408.southamerica-east1.run.app/docs](https://api-escolar-354902248408.southamerica-east1.run.app/docs)
+
+## Como Executar o Projeto Localmente
+Para executar a aplicação no seu ambiente de desenvolvimento, você precisará ter o Git e o Docker (com Docker Compose) instalados.
+
+1. Clone o repositório:
+   ~~~
+      git clone https://github.com/LucasRibasCardoso/demo-devops-imersao-alura.git
+      cd demo-imersao-alura-devops
+   ~~~
+2. Suba o ambiente com Docker Compose:
+   ~~~
+   docker-compose up
+   ~~~
+3. Acesse a API: http://localhost:8000/docs
 
